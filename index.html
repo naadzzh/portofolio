@@ -1,411 +1,478 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>K-Drama Journal</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  <style>
-  body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #f8fbff;
-  color: #333;
-  margin: 0;
-  padding: 0;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dzakiyahana | Data Scientist Portfolio</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pastelBlue: '#5D89BA', 
+                        mediumBlue: '#D1E3F5', 
+                        lightBlue: '#F0F7FF',  
+                        deepBlue: '#1E293B',   
+                        pureWhite: '#FFFFFF',
+                    },
+                    fontFamily: {
+                        heading: ['Montserrat', 'sans-serif'],
+                        body: ['Lato', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Lato', sans-serif; background-color: #F0F7FF; color: #1E293B; }
+        .nav-link { color: #1E293B; transition: all 0.3s ease; font-weight: 600; }
+        .nav-link:hover { color: #5D89BA; }
+        
+        .card { background: #FFFFFF; border: 1px solid rgba(93, 137, 186, 0.2); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(93, 137, 186, 0.3); border-color: #5D89BA; }
+        
+        .btn-vivid { background: linear-gradient(135deg, #5D89BA 0%, #3B6B9A 100%); color: #FFFFFF; }
+        .btn-vivid:hover { opacity: 0.9; transform: scale(1.05); box-shadow: 0 10px 25px -5px rgba(93, 137, 186, 0.5); }
+        
+        .section-title { position: relative; display: inline-block; padding-bottom: 12px; }
+        .section-title::after { content: ''; position: absolute; left: 0; bottom: 0; width: 60px; height: 5px; background: #5D89BA; border-radius: 99px; }
+        
+        .bg-mesh { 
+            background-color: #F0F7FF;
+            background-image: radial-gradient(at 0% 0%, rgba(93, 137, 186, 0.15) 0, transparent 50%), 
+                              radial-gradient(at 100% 100%, rgba(93, 137, 186, 0.1) 0, transparent 50%);
+        }
 
-header {
-  background-color: #d7e8ff;
-  text-align: center;
-  padding: 1.5rem 1rem;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-header h1 {
-  font-family: 'Playfair Display', serif;
-  color: #2a5b9d;
-  margin: 0;
-  font-size: 2rem;
-}
-
-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 1rem 0 0 0;
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-}
-
-nav a {
-  text-decoration: none;
-  color: #2a5b9d;
-  font-weight: 600;
-}
-
-nav a:hover {
-  color: #0056b3;
-}
-
-.beranda, .kontak {
-  text-align: center;
-  padding: 2rem 1rem;
-}
-
-.daftar-drama {
-  padding: 2rem;
-}
-
-.daftar-drama h2 {
-  text-align: center;
-  color: #2a5b9d;
-  margin-bottom: 1rem;
-}
-
-.drama-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
-}
-
-.drama-card {
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-  overflow: hidden;
-  transition: transform 0.2s;
-}
-
-.drama-card:hover {
-  transform: translateY(-5px);
-}
-
-.drama-card img {
-  width: 100%;
-  height: 380px;
-  object-fit: cover;
-}
-
-.drama-info {
-  padding: 1rem;
-}
-
-.drama-info h3 {
-  color: #2a5b9d;
-  font-family: 'Playfair Display', serif;
-  margin-bottom: 0.5rem;
-}
-
-.drama-info p {
-  font-size: 0.9rem;
-  line-height: 1.5;
-  margin-bottom: 0.5rem;
-}
-
-.favorit-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.favorit-card {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  padding: 15px;
-}
-
-.favorit-card img {
-  width: 180px;
-  height: 260px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.favorit-info h3 {
-  margin-bottom: 5px;
-  color: #d63384;
-}
-
-.favorit-info p {
-  margin: 0;
-  color: #444;
-}
-
-footer {
-  text-align: center;
-  background-color: #d7e8ff;
-  padding: 1rem;
-  color: #2a5b9d;
-  font-weight: 600;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  max-width: 400px;
-  margin: auto;
-  gap: 0.5rem;
-}
-
-input, textarea {
-  border: 1px solid #a8c7ff;
-  border-radius: 8px;
-  padding: 0.6rem;
-  font-family: 'Poppins';
-}
-
-button {
-  background-color: #2a5b9d;
-  color: white;
-  padding: 0.7rem;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #1b4174;
-}
-</style>
+        .glass-blue {
+            background: rgba(209, 227, 245, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+    </style>
 </head>
-<body>
-  <header>
-    <h1>K-Drama Journal</h1>
-    <nav>
-      <ul>
-        <li><a href="#beranda">Beranda</a></li>
-        <li><a href="#daftar-drama">Daftar Drama</a></li>
-        <li><a href="#genre">Genre</a></li>
-        <li><a href="#favoritku">Favoritku</a></li>
-        <li><a href="#profil">Profil</a></li>
-        <li><a href="#kontak">Kontak</a></li>
-      </ul>
-    </nav>
-  </header>
+<body class="overflow-x-hidden text-deepBlue bg-mesh">
 
-  <main>
-    <section id="beranda" class="beranda">
-      <h2>✨ Drama Terbaru & Trending ✨</h2>
-      <p>Setiap drama punya kisahnya sendiri — tentang cinta, perjuangan, dan harapan. Di sini, kita tidak hanya menonton, tapi juga belajar memahami hati melalui layar. Temukan drama Korea terbaru dan favoritmu di sini. Dari romansa manis hingga misteri mendebarkan!</p>
+    <!-- 1. Header & Navigation -->
+    <header class="fixed w-full top-0 z-50 bg-pureWhite/70 backdrop-blur-xl border-b border-pastelBlue/20 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-serif font-bold text-pastelBlue tracking-tighter flex items-center gap-2">
+                <div class="w-8 h-8 bg-pastelBlue rounded-lg rotate-12 flex items-center justify-center text-white text-sm">H</div>
+                dzakiyahana.
+            </div>
+            <div class="hidden md:flex space-x-8 font-heading text-[11px] uppercase tracking-[0.2em]">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#portfolio" class="nav-link">Portfolio</a>
+                <a href="#achievements" class="nav-link">Achievements</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="md:hidden text-pastelBlue">
+                <i data-lucide="menu"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 2. Beranda (Home) -->
+    <section id="home" class="min-h-screen flex items-center pt-20 relative overflow-hidden">
+        <div class="absolute top-1/4 -right-20 w-96 h-96 bg-pastelBlue/10 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-1/4 -left-20 w-80 h-80 bg-pastelBlue/10 rounded-full blur-3xl"></div>
+        
+        <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="order-2 md:order-1">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pastelBlue/15 text-pastelBlue text-xs font-bold tracking-widest uppercase mb-8 border border-pastelBlue/20">
+                    <span class="w-2 h-2 bg-pastelBlue rounded-full animate-ping"></span>
+                    Statistics & Data Science Specialist
+                </div>
+                <h1 class="text-5xl md:text-7xl font-heading font-bold mb-6 text-deepBlue leading-tight">
+                    Hana Qonita <br> <span class="text-pastelBlue">Dzakiyah, S.Stat.</span>
+                </h1>
+                <p class="text-slate-600 max-w-lg mb-10 text-lg leading-relaxed border-l-4 border-pastelBlue/30 pl-6">
+                    Menganalisis pola tersembunyi untuk menciptakan masa depan berbasis data yang lebih cerdas dan berdampak.
+                </p>
+                <div class="flex flex-wrap gap-5">
+                    <a href="#portfolio" class="btn-vivid font-bold py-4 px-10 rounded-2xl transition-all duration-300 shadow-xl flex items-center gap-3">
+                        Lihat Proyek <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </a>
+                    <a href="#contact" class="bg-pureWhite border-2 border-pastelBlue/40 text-pastelBlue hover:border-pastelBlue hover:bg-lightBlue font-bold py-4 px-10 rounded-2xl transition-all duration-300">Hubungi Saya</a>
+                </div>
+            </div>
+            <div class="order-1 md:order-2 flex justify-center">
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-pastelBlue rounded-[2.5rem] rotate-6 scale-95 group-hover:rotate-3 transition-transform duration-500"></div>
+                    <div class="relative w-72 h-96 md:w-96 md:h-[520px] rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white bg-lightBlue">
+                        <div class="w-full h-full bg-gradient-to-tr from-deepBlue via-pastelBlue to-mediumBlue flex flex-col items-center justify-center p-12 text-white relative">
+                            <i data-lucide="waves" class="w-64 h-64 opacity-5 absolute top-0 left-0"></i>
+                            <div class="glass-blue w-24 h-24 rounded-full flex items-center justify-center mb-8 shadow-inner">
+                                <i data-lucide="pie-chart" class="w-10 h-10"></i>
+                            </div>
+                            <div class="text-center z-10">
+                                <h3 class="font-serif italic text-2xl mb-2">"Numbers tell stories."</h3>
+                                <div class="h-1 w-12 bg-white/50 mx-auto rounded-full mb-4"></div>
+                                <p class="text-[10px] tracking-[0.4em] uppercase font-bold opacity-80">Unpad</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="daftar-drama" class="daftar-drama">
-      <h2>📺 Daftar Drama</h2>
-      <div class="drama-grid" id="dramaList">
-        <!-- Drama cards akan dimasukkan lewat JS -->
-      </div>
+    <!-- 3. Tentang Saya (About Me) -->
+    <section id="about" class="py-32 relative">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-16 items-start">
+                    <!-- Text Profile -->
+                    <div class="relative">
+                        <div class="glass-blue p-10 rounded-[2rem] border-2 border-pastelBlue/10 h-full">
+                            <h3 class="text-4xl font-heading font-bold text-deepBlue section-title mb-8">Profil Profesional</h3>
+                            <p class="text-slate-600 mb-6 leading-relaxed italic">
+                                "Saya percaya bahwa setiap dataset memiliki jiwa. Tugas saya adalah menghidupkannya melalui visualisasi dan analisis yang akurat."
+                            </p>
+                            <p class="text-slate-600 mb-8 leading-relaxed">
+                                Berbekal gelar Sarjana Statistika dari <span class="font-bold text-pastelBlue underline decoration-pastelBlue/30 underline-offset-4">Universitas Padjajaran</span>, saya berfokus pada efisiensi pengolahan data besar.
+                            </p>
+                            
+                            <!-- Academic Timeline -->
+                            <div class="mt-10 space-y-6">
+                                <h4 class="text-xs font-bold text-pastelBlue uppercase tracking-[0.2em] mb-4">Riwayat Studi</h4>
+                                <div class="relative pl-6 border-l-2 border-pastelBlue/20 space-y-6">
+                                    <div class="relative">
+                                        <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-pastelBlue border-4 border-white"></div>
+                                        <p class="text-sm font-bold text-deepBlue">Universitas Padjajaran</p>
+                                        <p class="text-xs text-slate-500">S1 Statistika</p>
+                                    </div>
+                                    <div class="relative">
+                                        <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-mediumBlue border-4 border-white"></div>
+                                        <p class="text-sm font-bold text-deepBlue">SMAN 1 Subang</p>
+                                        <p class="text-xs text-slate-500">MIPA</p>
+                                    </div>
+                                    <div class="relative">
+                                        <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-mediumBlue/60 border-4 border-white"></div>
+                                        <p class="text-sm font-bold text-deepBlue">SMPIT Al Ukhuwah</p>
+                                    </div>
+                                    <div class="relative">
+                                        <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-mediumBlue/40 border-4 border-white"></div>
+                                        <p class="text-sm font-bold text-deepBlue">SDIT 'Alamy</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skills Summary Cards -->
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-2 gap-6 mb-6">
+                            <div class="bg-pureWhite p-6 rounded-3xl border border-pastelBlue/10 shadow-sm">
+                                <p class="text-xs font-bold text-pastelBlue uppercase tracking-tighter">IPK Akumulatif</p>
+                                <p class="text-3xl font-bold text-deepBlue leading-none mt-2">3.88</p>
+                            </div>
+                            <div class="bg-pureWhite p-6 rounded-3xl border border-pastelBlue/10 shadow-sm">
+                                <p class="text-xs font-bold text-pastelBlue uppercase tracking-tighter">Proyek Selesai</p>
+                                <p class="text-3xl font-bold text-deepBlue leading-none mt-2">12+</p>
+                            </div>
+                        </div>
+
+                        <div class="card p-8 rounded-3xl bg-gradient-to-br from-white to-lightBlue">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-pastelBlue rounded-2xl flex items-center justify-center text-white flex-shrink-0 shadow-lg shadow-pastelBlue/20">
+                                    <i data-lucide="search"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-2 text-deepBlue">Riset & Analitik</h4>
+                                    <p class="text-sm text-slate-500">Mampu menangani survei skala besar dan analisis data primer/sekunder dengan akurasi tinggi.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card p-8 rounded-3xl bg-gradient-to-br from-white to-lightBlue">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-pastelBlue rounded-2xl flex items-center justify-center text-white flex-shrink-0 shadow-lg shadow-pastelBlue/20">
+                                    <i data-lucide="presentation"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-2 text-deepBlue">Visualisasi Strategis</h4>
+                                    <p class="text-sm text-slate-500">Membangun dashboard interaktif yang memudahkan stakeholder memahami tren pasar.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-   <section id="favoritku" class="favoritku">
-  <h2>💖 Favoritku</h2>
-  <p>Beberapa drama yang paling berkesan dan selalu aku rekomendasikan ke siapa pun! ✨</p>  
+    <!-- 4. Keahlian (Skills) -->
+    <section id="skills" class="py-32 bg-pureWhite/50 backdrop-blur-sm relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <h3 class="text-3xl font-heading font-bold text-deepBlue">Tech Stack Utama</h3>
+                <p class="text-pastelBlue font-bold text-sm tracking-widest uppercase mt-2">Tools & Languages</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="card p-8 rounded-[2rem] border-b-4 border-b-pastelBlue">
+                    <i data-lucide="terminal" class="text-pastelBlue mb-6 w-10 h-10"></i>
+                    <h4 class="text-deepBlue font-bold mb-6">Programming</h4>
+                    <div class="space-y-4">
+                        <div class="flex justify-between text-xs font-bold"><span>R Language</span><span>95%</span></div>
+                        <div class="h-2 bg-lightBlue rounded-full overflow-hidden">
+                            <div class="h-full bg-pastelBlue w-[95%]"></div>
+                        </div>
+                        <div class="flex justify-between text-xs font-bold"><span>Python (DS)</span><span>80%</span></div>
+                        <div class="h-2 bg-lightBlue rounded-full overflow-hidden">
+                            <div class="h-full bg-pastelBlue w-[80%]"></div>
+                        </div>
+                    </div>
+                </div>
 
-  <div class="favorit-list">
-    <div class="favorit-card">
-      <img src="https://i.ibb.co.com/Q7q791tP/lovely-runner.jpg" alt="Lovely Runner">
-      <div class="favorit-info">
-        <h3>Lovely Runner (2024)</h3>
-        <p>💬 Ceritanya hangat banget, bikin nangis tapi juga healing. Wajib tonton!</p>
-      </div>
-    </div>
-    
-    <div class="favorit-card">
-      <img src="https://i.ibb.co.com/nNXYb1QJ/resident-playbook-1.jpg" alt="Resident Playbook">
-      <div class="favorit-info">
-        <h3>Resident Playbook (2025)</h3>
-        <p>💬 Slice of life paling wholesome tahun ini! Persahabatan dan dunia medis yang realistis tapi lucu.</p>
-      </div>
-    </div>
-  </div>
-</section>
+                <div class="card p-8 rounded-[2rem] border-b-4 border-b-pastelBlue">
+                    <i data-lucide="layout" class="text-pastelBlue mb-6 w-10 h-10"></i>
+                    <h4 class="text-deepBlue font-bold mb-6">Software</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-pastelBlue/10 text-pastelBlue rounded-lg text-[10px] font-bold border border-pastelBlue/20">Tableau</span>
+                        <span class="px-3 py-1 bg-pastelBlue/10 text-pastelBlue rounded-lg text-[10px] font-bold border border-pastelBlue/20">SPSS</span>
+                        <span class="px-3 py-1 bg-pastelBlue/10 text-pastelBlue rounded-lg text-[10px] font-bold border border-pastelBlue/20">Power BI</span>
+                        <span class="px-3 py-1 bg-pastelBlue/10 text-pastelBlue rounded-lg text-[10px] font-bold border border-pastelBlue/20">Excel Expert</span>
+                    </div>
+                </div>
 
+                <div class="card p-8 rounded-[2rem] border-b-4 border-b-pastelBlue">
+                    <i data-lucide="database" class="text-pastelBlue mb-6 w-10 h-10"></i>
+                    <h4 class="text-deepBlue font-bold mb-6">Database</h4>
+                    <ul class="space-y-3 text-xs text-slate-500 font-bold">
+                        <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-pastelBlue"></i> SQL Server</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-pastelBlue"></i> BigQuery</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="w-4 h-4 text-pastelBlue"></i> MongoDB</li>
+                    </ul>
+                </div>
 
-    <section id="genre" class="genre">
-  <h2>🎭 Pilih Genre Favoritmu</h2>
-  <p>Drama Korea punya banyak rasa — kamu lagi pengen yang mana hari ini? 😉</p>
-  <div class="genre-list">
-  <button class="genre-btn" data-genre="Romansa">Romansa</button>
-  <button class="genre-btn" data-genre="Komedi">Komedi</button>
-  <button class="genre-btn" data-genre="Misteri">Misteri</button>
-  <button class="genre-btn" data-genre="Slice of Life">Slice of Life</button>
-  <button class="genre-btn" data-genre="Fantasi">Fantasi</button>
-  <button class="genre-btn" data-genre="Thriller">Thriller</button>
-    <button class="genre-btn" data-genre="all">Tampilkan Semua</button>
-
-</div>
-</section>
-
-    <section id="profil" class="profil">
-  <h2>👩‍💻 Tentang Penulis</h2>
-  <div class="profil-container">
-    <div class="profil-teks">
-      <p>Halo, aku — penulis, dan pencinta drama Korea 🎬.</p>
-      <p>Lewat <em>K-Drama Journal</em>, aku ingin berbagi ulasan yang hangat dan jujur tentang drama-drama yang memberi pelajaran hidup, harapan, dan senyum di tengah hari-hari sibuk 💖.</p>
-      <p>Genre favoritku: <strong>Romansa & Slice of Life</strong>.</p>
-    </div>
-  </div>
-</section>
-
-    <section id="kontak" class="kontak">
-      <h2>💌 Kontak</h2>
-      <form id="contactForm">
-        <label>Nama:</label>
-        <input type="text" id="name" required>
-        <label>Pesan atau saran drama:</label>
-        <textarea id="message" rows="4" required></textarea>
-        <button type="submit">Kirim</button>
-      </form>
-      <p id="statusMsg"></p>
+                <div class="card p-8 rounded-[2rem] border-b-4 border-b-pastelBlue">
+                    <i data-lucide="brain-circuit" class="text-pastelBlue mb-6 w-10 h-10"></i>
+                    <h4 class="text-deepBlue font-bold mb-6">Methodology</h4>
+                    <div class="space-y-2">
+                        <div class="px-4 py-2 bg-lightBlue rounded-xl text-[10px] font-bold text-pastelBlue">Predictive Analysis</div>
+                        <div class="px-4 py-2 bg-lightBlue rounded-xl text-[10px] font-bold text-pastelBlue">A/B Testing</div>
+                        <div class="px-4 py-2 bg-lightBlue rounded-xl text-[10px] font-bold text-pastelBlue">Machine Learning</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
-  </main>
 
-  <footer>
-    <p>© 2025 K-Drama Journal</p>
-  </footer>
+    <!-- 5. Portofolio -->
+    <section id="portfolio" class="py-32 relative">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-20 gap-6">
+                <div class="text-center md:text-left">
+                    <h3 class="text-4xl font-heading font-bold text-deepBlue section-title">Pameran Proyek</h3>
+                    <p class="text-slate-500 mt-4">Solusi data nyata untuk tantangan industri.</p>
+                </div>
+                <div class="flex gap-4">
+                    <button class="w-12 h-12 bg-pastelBlue/10 text-pastelBlue rounded-full border border-pastelBlue/20 flex items-center justify-center hover:bg-pastelBlue hover:text-white transition-colors">
+                        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    </button>
+                    <button class="w-12 h-12 bg-pastelBlue/10 text-pastelBlue rounded-full border border-pastelBlue/20 flex items-center justify-center hover:bg-pastelBlue hover:text-white transition-colors">
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-10">
+                <div class="group card rounded-[2.5rem] overflow-hidden">
+                    <div class="h-64 bg-pastelBlue relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-deepBlue/80 to-transparent z-10 opacity-60"></div>
+                        <div class="absolute inset-0 flex items-center justify-center text-white/20 group-hover:scale-110 transition-transform duration-700">
+                            <i data-lucide="trending-up" class="w-40 h-40"></i>
+                        </div>
+                        <div class="absolute bottom-6 left-6 z-20">
+                            <span class="px-3 py-1 bg-white/20 backdrop-blur-md rounded-lg text-[10px] font-bold text-white uppercase border border-white/30">Economy</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="text-xl font-bold mb-3 text-deepBlue group-hover:text-pastelBlue transition-colors">Forecasting Pangan Jabar</h4>
+                        <p class="text-sm text-slate-500 mb-8">Pemodelan Time Series menggunakan R untuk memprediksi fluktuasi harga beras nasional.</p>
+                        <div class="flex justify-between items-center pt-6 border-t border-pastelBlue/10">
+                            <span class="text-[10px] font-bold text-pastelBlue uppercase">R Programming &middot; ARIMA</span>
+                            <a href="#" class="w-10 h-10 rounded-full bg-lightBlue text-pastelBlue flex items-center justify-center hover:bg-pastelBlue hover:text-white transition-all">
+                                <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-  <script>
-  const dramaList = [
-  {
-    title: "Resident Playbook (2025)",
-    genre: "Medis, Slice of Life, Persahabatan",
-    poster: "https://i.ibb.co.com/nNXYb1QJ/resident-playbook-1.jpg",
-    sinopsis: "Cerita tentang para dokter muda di Rumah Sakit Yulje yang berjuang menyeimbangkan hidup pribadi dan pekerjaan. Mereka belajar banyak hal tentang dunia medis, tapi juga tentang hubungan, tanggung jawab, dan arti teman sejati.",
-    review: "Drama ini berasa hangat banget. Walaupun ceritanya tentang dunia rumah sakit, tapi nggak melulu soal pasien — lebih ke kehidupan para dokternya. Kadang lucu, kadang sedih, tapi banyak banget nilai tentang kerja keras dan empati."
-  },
-  {
-    title: "Bon Appétit, Your Majesty (2025)",
-    genre: "Romansa, Fantasi Sejarah, Komedi",
-    poster: "https://i.ibb.co.com/93zXrQHb/bon-apetit.jpg",
-    sinopsis: "Seorang koki modern tiba-tiba terlempar ke masa kerajaan Joseon dan harus bekerja sebagai juru masak istana. Di sana, dia bertemu dengan raja muda yang dingin tapi punya rasa ingin tahu tinggi soal makanan. Dari dapur kerajaan, muncul kisah cinta yang hangat dan lucu.",
-    review: "Drama ini bikin laper tiap nonton 😭🍲. Tapi yang paling menarik itu chemistry antara dua pemeran utamanya — manis banget tapi nggak berlebihan. Ceritanya juga ringan, cocok banget buat healing setelah nonton drama yang berat."
-  },
-  {
-    title: "Our Unwritten Seoul (2025)",
-    genre: "Drama, Romansa, Kehidupan",
-    poster: "https://i.ibb.co.com/SXCvMzMg/our-unwritten-soul.jpg",
-    sinopsis: "Dua saudari kembar dengan kehidupan yang sangat berbeda — satu tinggal di desa, satu di kota besar. Suatu hari mereka saling bertukar peran dan belajar memahami dunia satu sama lain.",
-    review: "Drama ini tenang tapi dalam banget. Nggak banyak konflik besar, tapi penuh makna tentang keluarga dan pencarian jati diri. Nuansanya hangat dan sinematografinya bikin nyaman banget dilihat."
-  },
-  {
-    title: "Salon de Holmes (2025)",
-    genre: "Misteri, Komedi, Detektif",
-    poster: "https://i.ibb.co.com/TBTgZxjQ/salon-de-holmes.png",
-    sinopsis: "Sekelompok ibu-ibu komplek yang mencampuri urusan orang dan tiba-tiba jadi tempat penyelidikan kasus-kasus kecil di lingkungan sekitar. Mereka memecahkan misteri sambil menjalani kehidupan sehari-hari",
-    review: "Lucu dan unik! Gabungan antara detektif dan komedi ringan yang nggak bikin tegang. Tiap kasusnya punya pesan moral sendiri, dan karakter-karakternya juga seru banget."
-  },
-  {
-    title: "Beyond the Bar (2024)",
-    genre: "Drama, Hukum, Slice of Life",
-    poster: "https://i.ibb.co.com/Pscg09WM/beyond-the-bar.jpg",
-    sinopsis: "Mengisahkan kehidupan para pengacara muda di sebuah firma hukum yang sering menghadapi dilema moral antara keadilan dan keuntungan.",
-    review: "Awalnya keliatan bakal berat banget, tapi ternyata ceritanya justru realistis dan menyentuh. Banyak adegan yang bikin mikir tentang benar dan salah. Tokoh utamanya idealis tapi masih belajar menghadapi dunia nyata."
-  },
-  {
-    title: "Lovely Runner (2024)",
-    genre: "Romansa, fantasi, perjalanan waktu",
-    poster: "https://i.ibb.co.com/Q7q791tP/lovely-runner.jpg",
-    sinopsis: "Seorang penggemar berat idol yang meninggal secara tragis tiba-tiba dikirim kembali ke masa lalu. Dia bertekad menyelamatkan idol favoritnya dan mengubah takdir mereka berdua.",
-    review: "Drama ini bener-bener bikin nangis, ketawa, dan senyum sendiri 😭💖. Ceritanya manis banget, tapi juga penuh pesan tentang kesempatan kedua dan arti mencintai seseorang tanpa pamrih. Ending-nya juga memuaskan banget."
-  },
-   {
-    title: "Queen of Tears (2024)",
-    genre: " Romansa, melodrama, keluarga",
-    poster: "https://i.ibb.co.com/DfMZWNHs/queen-of-tears.png",
-    sinopsis: "Seorang pewaris chaebol dan suaminya yang berasal dari keluarga sederhana harus mempertahankan pernikahan mereka di tengah krisis, kesalahpahaman, dan tekanan keluarga besar.",
-    review: "Salah satu drama paling emosional yang pernah aku tonton 😭. Chemistry Kim Soo Hyun dan Kim Ji Won tuh luar biasa banget. Ceritanya bikin hati campur aduk — antara sakit, sedih, tapi juga hangat. Banyak pelajaran tentang cinta setelah pernikahan, bukan cuma sebelum."
-  },
- {
-    title: "Do Do Sol Sol La La Sol (2020)",
-    genre: "Komedi romantis, musik",
-    poster: "https://i.ibb.co.com/jkMJphjC/do-do-sol-sol-la-la-sol.jpg",
-    sinopsis: "Seorang pianis kaya raya tiba-tiba kehilangan segalanya dan terdampar di kota kecil. Di sana, dia bertemu pemuda misterius yang menolongnya dan perlahan menumbuhkan harapan baru.",
-    review: "Lucu, hangat, dan penuh kejutan 🩵. Awalnya kelihatan kayak rom-com biasa, tapi makin lama makin dalam dan bikin terharu. Musiknya juga bagus banget, dan ending-nya... duh, siapin tisu deh."
-  },
- {
-    title: "Hierarchy (2024)",
-    genre: "Drama, Thriller, Sekolah",
-    poster: "https://i.ibb.co.com/LD8vTRZm/hierarchy.png",
-    sinopsis: "Drama ini berlatar di sekolah elit Jooshin High School, tempat anak-anak dari keluarga kaya berkuasa. Namun, kedatangan siswa baru dari keluarga biasa mulai mengguncang sistem hierarki dan membuka rahasia kelam di balik kemewahan sekolah tersebut.",
-    review: "Seru dan tegang! Ceritanya seperti Elite versi Korea — penuh misteri, intrik sosial, dan ketegangan antar karakter. Visualnya juga keren banget, bikin betah nonton."
-  },
- {
-    title: "All of Us Are Dead (2022)",
-    genre: "Aksi, Horor, Thriller",
-    poster: "https://i.ibb.co.com/k2hKkq9n/all-of-us-are-dead.jpg",
-    sinopsis: "Sekelompok siswa terjebak di sekolah yang menjadi pusat wabah zombie. Mereka berjuang untuk bertahan hidup sambil mencari jalan keluar dan kehilangan teman satu per satu.",
-    review: " Tegang dari awal sampai akhir! Banyak adegan emosional juga yang bikin nangis. Cocok banget buat yang suka drama bertema survival dan zombie."
-  },
- {
-    title: "Doctor Slump (2024)",
-    genre: "Romantis, Komedi, Medis",
-    poster: "https://i.ibb.co.com/gLsj8xs9/doctor-slump.jpg",
-    sinopsis: "Kisah dua mantan rival sekolah kedokteran yang kini sama-sama terpuruk dalam hidup. Takdir mempertemukan mereka kembali di saat keduanya sedang mengalami krisis pribadi.",
-    review: "Lucu tapi hangat. Ceritanya relatable banget tentang burnout dan bagaimana seseorang bisa menemukan harapan lagi lewat cinta dan dukungan satu sama lain."
-  },
-  {
-    title: "When Life Gives You Tangerine (2025)",
-    genre: "Romantis, Nostalgia, Slice of Life",
-    poster: "https://i.ibb.co.com/9mhqDZmc/when-life-gives-you-tangerine.jpg",
-    sinopsis: "Berlatar di Pulau Jeju tahun 1990-an, drama ini mengikuti kisah cinta dan kehidupan dua remaja yang tumbuh bersama di tengah perubahan zaman.",
-    review: " Penuh nuansa nostalgia dan suasana hangat pedesaan. Sinematografinya indah banget, dan ceritanya lembut tapi membekas di hati."
-  },
-];
-const container = document.getElementById("dramaList");
-dramaList.forEach(drama => {
-  const card = document.createElement("div");
-  card.className = "drama-card";
-  card.innerHTML = `
-    <img src="${drama.poster}" alt="${drama.title}">
-    <div class="drama-info">
-      <h3>${drama.title}</h3>
-      <p><strong>Genre:</strong> ${drama.genre}</p>
-      <p><strong>Sinopsis:</strong> ${drama.sinopsis}</p>
-      <p><strong>Review:</strong> ${drama.review}</p>
-    </div>
-  `;
-  container.appendChild(card);
-});
+                <div class="group card rounded-[2.5rem] overflow-hidden">
+                    <div class="h-64 bg-deepBlue relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-pastelBlue/80 to-transparent z-10 opacity-60"></div>
+                        <div class="absolute inset-0 flex items-center justify-center text-white/20 group-hover:scale-110 transition-transform duration-700">
+                            <i data-lucide="activity" class="w-40 h-40"></i>
+                        </div>
+                        <div class="absolute bottom-6 left-6 z-20">
+                            <span class="px-3 py-1 bg-white/20 backdrop-blur-md rounded-lg text-[10px] font-bold text-white uppercase border border-white/30">Health</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="text-xl font-bold mb-3 text-deepBlue group-hover:text-pastelBlue transition-colors">Risk Monitoring Stunting</h4>
+                        <p class="text-sm text-slate-500 mb-8">Dashboard interaktif visualisasi persebaran data kesehatan anak di pedesaan.</p>
+                        <div class="flex justify-between items-center pt-6 border-t border-pastelBlue/10">
+                            <span class="text-[10px] font-bold text-pastelBlue uppercase">Tableau &middot; GIS</span>
+                            <a href="#" class="w-10 h-10 rounded-full bg-lightBlue text-pastelBlue flex items-center justify-center hover:bg-pastelBlue hover:text-white transition-all">
+                                <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-// ===== Filter Berdasarkan Genre =====
-const genreButtons = document.querySelectorAll('.genre-btn');
+                <div class="group card rounded-[2.5rem] overflow-hidden">
+                    <div class="h-64 bg-mediumBlue relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-deepBlue/80 to-transparent z-10 opacity-60"></div>
+                        <div class="absolute inset-0 flex items-center justify-center text-white/20 group-hover:scale-110 transition-transform duration-700">
+                            <i data-lucide="shopping-cart" class="w-40 h-40"></i>
+                        </div>
+                        <div class="absolute bottom-6 left-6 z-20">
+                            <span class="px-3 py-1 bg-white/20 backdrop-blur-md rounded-lg text-[10px] font-bold text-white uppercase border border-white/30">Marketing</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="text-xl font-bold mb-3 text-deepBlue group-hover:text-pastelBlue transition-colors">Segmentasi Customer AI</h4>
+                        <p class="text-sm text-slate-500 mb-8">Optimasi kampanye marketing melalui pengelompokan pola belanja pelanggan.</p>
+                        <div class="flex justify-between items-center pt-6 border-t border-pastelBlue/10">
+                            <span class="text-[10px] font-bold text-pastelBlue uppercase">Python &middot; Clustering</span>
+                            <a href="#" class="w-10 h-10 rounded-full bg-lightBlue text-pastelBlue flex items-center justify-center hover:bg-pastelBlue hover:text-white transition-all">
+                                <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-genreButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const selectedGenre = btn.getAttribute('data-genre').toLowerCase();
-    const dramaCards = document.querySelectorAll('.drama-card');
+    <!-- 6. Prestasi & Sertifikasi -->
+    <section id="achievements" class="py-32 bg-lightBlue">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-12 gap-16">
+                <div class="lg:col-span-5">
+                    <h3 class="text-3xl font-heading font-bold text-deepBlue section-title mb-10">Jejak Prestasi</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-6 p-6 bg-pureWhite rounded-[2rem] border border-pastelBlue/10 hover:shadow-lg transition-shadow">
+                            <div class="w-16 h-16 bg-pastelBlue text-white rounded-2xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="trophy" class="w-8 h-8"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-deepBlue">Juara 1 NSC</h5>
+                                <p class="text-xs text-slate-400 font-bold uppercase tracking-wider">National Level</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-6 p-6 bg-pureWhite rounded-[2rem] border border-pastelBlue/10 hover:shadow-lg transition-shadow">
+                            <div class="w-16 h-16 bg-mediumBlue text-pastelBlue rounded-2xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="target" class="w-8 h-8"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-deepBlue">Finalis Satria Data</h5>
+                                <p class="text-xs text-slate-400 font-bold uppercase tracking-wider">Big Data Challenge</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-7">
+                    <div class="bg-deepBlue p-12 rounded-[3rem] text-white relative overflow-hidden h-full shadow-2xl">
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-pastelBlue/20 rounded-full blur-[100px]"></div>
+                        <h3 class="text-2xl font-heading font-bold mb-10 flex items-center gap-4">
+                            <i data-lucide="award" class="text-pastelBlue"></i> Kompetensi Tersertifikasi
+                        </h3>
+                        <div class="grid md:grid-cols-2 gap-6 relative z-10">
+                            <div class="p-6 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 flex items-center gap-4">
+                                <div class="w-2 h-10 bg-pastelBlue rounded-full"></div>
+                                <span class="text-sm font-medium">Google Analytics Professional</span>
+                            </div>
+                            <div class="p-6 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 flex items-center gap-4">
+                                <div class="w-2 h-10 bg-pastelBlue rounded-full"></div>
+                                <span class="text-sm font-medium">Azure Data Science Associate</span>
+                            </div>
+                            <div class="p-6 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 flex items-center gap-4">
+                                <div class="w-2 h-10 bg-pastelBlue rounded-full"></div>
+                                <span class="text-sm font-medium">Certified Data Scientist (BNSP)</span>
+                            </div>
+                            <div class="p-6 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 flex items-center gap-4">
+                                <div class="w-2 h-10 bg-pastelBlue rounded-full"></div>
+                                <span class="text-sm font-medium">Statistik Unpad</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    dramaCards.forEach(card => {
-      const genreText = card.querySelector('p').textContent.toLowerCase();
-      if (genreText.includes(selectedGenre)) {
-        card.style.display = 'block';
-      } else {
-        card.style.display = 'none';
-        if (selectedGenre === 'all') {
-  dramaCards.forEach(card => card.style.display = 'block');
-}
-      }
-    });
-  });
-});
+    <!-- 7. Kontak -->
+    <section id="contact" class="py-32 relative overflow-hidden bg-pureWhite">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-5 pointer-events-none">
+            <div class="w-full h-full bg-[radial-gradient(#5D89BA_1px,transparent_1px)] [background-size:20px_20px]"></div>
+        </div>
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <h3 class="text-5xl font-heading font-bold mb-8 text-deepBlue">Every Data Point Tells a Story. I’m the Narrator.</h3>
+            <p class="text-slate-500 mb-16 max-w-2xl mx-auto text-lg">
+                Saya selalu terbuka untuk diskusi data, peluang karir, atau kolaborasi riset. Jangan ragu untuk menyapa!
+            </p>
+            
+            <div class="flex flex-wrap justify-center gap-8">
+                <a href="mailto:dzakiyahana10@gmail.com" class="group flex flex-col items-center gap-4">
+                    <div class="w-20 h-20 bg-lightBlue text-pastelBlue rounded-[2rem] flex items-center justify-center group-hover:bg-pastelBlue group-hover:text-white transition-all duration-500 group-hover:-rotate-12 shadow-lg shadow-pastelBlue/5">
+                        <i data-lucide="mail" class="w-8 h-8"></i>
+                    </div>
+                    <span class="text-xs font-bold text-deepBlue uppercase tracking-widest">Email</span>
+                </a>
+                <a href="https://linkedin.com/in/dzakiyahana" target="_blank" class="group flex flex-col items-center gap-4">
+                    <div class="w-20 h-20 bg-lightBlue text-pastelBlue rounded-[2rem] flex items-center justify-center group-hover:bg-pastelBlue group-hover:text-white transition-all duration-500 group-hover:rotate-12 shadow-lg shadow-pastelBlue/5">
+                        <i data-lucide="linkedin" class="w-8 h-8"></i>
+                    </div>
+                    <span class="text-xs font-bold text-deepBlue uppercase tracking-widest">LinkedIn</span>
+                </a>
+                <a href="https://instagram.com/dzakiyahanaa" target="_blank" class="group flex flex-col items-center gap-4">
+                    <div class="w-20 h-20 bg-lightBlue text-pastelBlue rounded-[2rem] flex items-center justify-center group-hover:bg-pastelBlue group-hover:text-white transition-all duration-500 group-hover:-rotate-12 shadow-lg shadow-pastelBlue/5">
+                        <i data-lucide="instagram" class="w-8 h-8"></i>
+                    </div>
+                    <span class="text-xs font-bold text-deepBlue uppercase tracking-widest">Instagram</span>
+                </a>
+            </div>
+        </div>
+    </section>
 
+    <!-- 8. Footer -->
+    <footer class="py-20 bg-deepBlue text-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-10">
+                <div class="text-center md:text-left">
+                    <div class="text-3xl font-serif font-bold text-pastelBlue mb-2">dzakiyahana.</div>
+                    <p class="text-white/40 text-xs font-bold uppercase tracking-widest leading-loose">
+                        Bachelor of Statistics &middot; Data Science Enthusiast <br> 
+                        Jawa Barat, Indonesia
+                    </p>
+                </div>
+                <div class="flex flex-col items-center md:items-end gap-6">
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center hover:bg-pastelBlue transition-colors"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                        <a href="#" class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center hover:bg-pastelBlue transition-colors"><i data-lucide="github" class="w-4 h-4"></i></a>
+                    </div>
+                    <p class="text-[10px] text-white/20 tracking-widest">
+                        &copy; 2026 HANA QONITA DZAKIYAH. ALL RIGHTS RESERVED.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-// form interaktif
-const form = document.getElementById("contactForm");
-const statusMsg = document.getElementById("statusMsg");
-
-form.addEventListener("submit", e => {
-  e.preventDefault();
-  statusMsg.textContent = "Terima kasih atas saranmu 💙";
-  form.reset();
-});
-
-</script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
